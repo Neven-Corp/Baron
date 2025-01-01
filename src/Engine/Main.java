@@ -7,7 +7,7 @@ import Engine.Core.GameWindow;
 public class Main {
 	public static void main(String[] args) {
 		// Initialize engine configuration
-		EngineConfig config = new EngineConfig(1920, 1080, false, 60);
+		EngineConfig config = new EngineConfig(1920, 1080, true, 60);
 
 		// Create and display the game window
 		GameWindow gameWindow = new GameWindow("My game", config);

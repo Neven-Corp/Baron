@@ -28,6 +28,7 @@ public class GameWindow {
 		canvas.setPreferredSize(new Dimension(config.getScreenWidth(), config.getScreenHeight()));
 		canvas.setFocusable(true);
 		canvas.requestFocus();
+		canvas.setBackground(Color.BLACK);
 		frame.add(canvas);
 		frame.pack();
 
