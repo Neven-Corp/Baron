@@ -1,14 +1,28 @@
 package Engine.Core;
 
+import Engine.Entities.Enemy;
 import Engine.Input.InputHandler;
 import Engine.Utils.Logger;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 
 
 public class GameLoop {
+	// Enemy's
+	private Enemy[] enemies = {
+			new Enemy(500, 960, 40, 40, 100), // Enemy 1
+			new Enemy(900, 760, 40, 40, 150), // Enemy 2
+			new Enemy(1300, 560, 40, 40, 120) // Enemy 3
+	};
+	// Platform properties
+	private Rectangle[] platforms = {
+			new Rectangle(400, 800, 200, 20), //1
+			new Rectangle(800,600, 300,20), //2
+			new Rectangle(1200, 400, 150, 20) //3
+	};
 	// Gravity and velocity
 	private double gravity = 500; // Strength of gravity (pixels per second squared)
 	private double verticalVelocity = 0; // Current speed in the vertical direction
@@ -103,9 +117,35 @@ public class GameLoop {
 			onGround = false;
 		}
 
+		// Platform collisions
+		for (Rectangle platform : platforms) {
+			if (playerLocationY + playerHeight > platform.y &&
+					playerLocationY < platform.y + platform.height &&
+					playerLocationX + playerWidth > platform.x &&
+					playerLocationX < platform.x + platform.width) {
+
+				// Colision detected; snap to top of the platform
+				playerLocationY = platform.y - playerHeight;
+				onGround = true;
+				break;
+			}
+		}
+
+		// Enemy logic
+		for (Enemy enemy : enemies) {
+			enemy.update(deltaTime, canvasWidth);
+		}
+		// Enemy colisions
+		for (Enemy enemy : enemies) {
+			if (enemy.isColliding(playerLocationX, playerLocationY, playerHeight, playerWidth)) {
+				System.out.println("Colision deteced");
+				running = false;
+			}
+		}
+
 		// Jumping logic
 		if (inputHandler.isKeyPressed(KeyEvent.VK_W) && onGround) {
-			verticalVelocity = - 300;
+			verticalVelocity = - 500;
 			onGround = false;
 		}
 	}
@@ -132,6 +172,17 @@ public class GameLoop {
 		// Draw a floor
 		g.setColor(Color.green);
 		g.fillRect(floorX, floorY, floorWidth, floorHeigth);
+
+		// Draw the platforms
+		g.setColor(Color.yellow);
+		for (Rectangle platform : platforms) {
+			g.fillRect(platform.x, platform.y, platform.width, platform.height);
+		}
+
+		// Render the enemy's
+		for (Enemy enemy : enemies) {
+			enemy.render(g);
+		}
 
 		// Dispose of Graphics and show the buffer
 		g.dispose();
