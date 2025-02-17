@@ -1,4 +1,4 @@
-package Lib.Input;
+package Baron.Input;
 
 import java.awt.event.*;
 import java.util.HashSet;

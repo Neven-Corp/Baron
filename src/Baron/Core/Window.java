@@ -1,4 +1,4 @@
-package Lib.Core;
+package Baron.Core;
 
 import javax.swing.*;
 
