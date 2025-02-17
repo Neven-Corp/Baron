@@ -1,13 +1,10 @@
-# Ignite game engine
+# Baron
 
-This is the official repo for the ignite game engine.
+Baron is a game library for Java.
 
-Pull request will rarely be merged, but issues will be fixed.
+## Development
 
-## Features
-Ignite is a game engine that can be cloned from github, and the game can be build on top on. It is not specificly a game engine but more a framework.
-See Our docs for current features. 
-## Contribution
+Join the Discord server to discuss the development of Baron.
 
-You can contribute by joining our discord, and sending a message with your github username in the contribution-engine channel.
-That will make sure that your pull request will be accepted
+Baron is currently in development and is not yet ready for use.
+
