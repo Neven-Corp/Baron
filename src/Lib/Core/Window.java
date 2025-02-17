@@ -47,7 +47,6 @@ public class Window {
 		jframe.setVisible(true);
 		jframe.setResizable(false);
 		jframe.setLocationRelativeTo(null);
-
 	}
 
 }
